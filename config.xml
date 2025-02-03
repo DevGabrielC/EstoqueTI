@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\gabriel.coelho\Desktop\Estoque_TI\out\artifacts\Estoque_TI_jar\Estoque_TI.jar</jar>
+  <outfile>C:\Users\gabriel.coelho\Desktop\Estoque_TI\app\Estoque TI Lafaete.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\gabriel.coelho\Desktop\Estoque_TI\images\iconeTI.ico</icon>
+  <classPath>
+    <mainClass>co.devgabrielc.br.application.Application</mainClass>
+    <cp>lib/javafx-controls.jar</cp>
+    <cp>lib/javafx-fxml.jar</cp>
+    <cp>lib/mysql-connector-java-x.x.x.jar</cp>
+  </classPath>
+  <jre>
+    <path>JRE</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion></minVersion>
+    <maxVersion></maxVersion>
+    <opt>--module-path &quot;C:\Users\gabriel.coelho\Desktop\Estoque_TI\libs\javafx-sdk-23\lib&quot; --add-modules javafx.controls,javafx.fxml</opt>
+  </jre>
+</launch4jConfig>
