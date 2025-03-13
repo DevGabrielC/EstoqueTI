@@ -13,8 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import static co.devgabrielc.br.controllers.LoginController.*;
-import static co.devgabrielc.br.helpers.Functions.showAlertError;
-import static co.devgabrielc.br.helpers.Functions.showAlertSuccess;
+import static co.devgabrielc.br.services.Functions.showAlertError;
+import static co.devgabrielc.br.services.Functions.showAlertSuccess;
 
 public class RegisterController {
     @FXML
@@ -64,7 +64,7 @@ public class RegisterController {
     @FXML
     void handleCancelar() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/screens/LoginScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/views/LoginScreen.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) cancelButton.getScene().getWindow();

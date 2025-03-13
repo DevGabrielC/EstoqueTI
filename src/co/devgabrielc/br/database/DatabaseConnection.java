@@ -5,11 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static co.devgabrielc.br.helpers.Functions.showAlertError;
+import static co.devgabrielc.br.services.Functions.showAlertError;
 
 public class DatabaseConnection {
     // Função completa para conectar ao Banco de Dados SQLITE3
-    private static final String URL = "jdbc:sqlite:db/estoqueti.db";
+    private static final String URL = "jdbc:sqlite:app/db/estoqueti.db";
 
     public static Connection connect() throws SQLException {
         return DriverManager.getConnection(URL);
@@ -20,6 +20,7 @@ public class DatabaseConnection {
         String sql = "UPDATE materiais SET " + coluna + " = ? WHERE id = ?";
         try (Connection conn = DatabaseConnection.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
             if (novoValor instanceof Integer) {
                 pstmt.setInt(1, (Integer) novoValor);
             } else if (novoValor instanceof String) {
@@ -29,6 +30,7 @@ public class DatabaseConnection {
             }
             pstmt.setInt(2, id);
             pstmt.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
             showAlertError("Erro!", "Erro ao atualizar o Banco de Dados.");

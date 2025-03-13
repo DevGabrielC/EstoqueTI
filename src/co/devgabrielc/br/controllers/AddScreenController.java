@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static co.devgabrielc.br.services.Functions.showAlertError;
+
 // Tela para escolher materiais que serão adicionados
 // Duas alternativas, sendo Ativo Imobilizado e Uso e Consumo
 public class AddScreenController {
@@ -24,35 +26,35 @@ public class AddScreenController {
     @FXML
     void handleAtivoImobilizadoScreen(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/screens/AtivoImobilizado.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/views/AtivoImobilizado.fxml"));
             Parent initialize = loader.load();
             Stage stage = (Stage) ativoImobilizadoButton.getScene().getWindow();
             Scene scene = new Scene(initialize);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            showAlertError("Erro!", "Não foi possível carregar a tela (Ativo Imobilizado).");
         }
     }
 
     @FXML
     void handleUsoConsumoScreen(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/screens/UsoConsumo.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/views/UsoConsumo.fxml"));
             Parent initialize = loader.load();
             Stage stage = (Stage) usoConsumoButton.getScene().getWindow();
             Scene scene = new Scene(initialize);
             stage.setScene(scene);
             stage.show();
         } catch (IOException e){
-            e.printStackTrace();
+            showAlertError("Erro!", "Não foi possível carregar a tela (Uso e Consumo).");
         }
     }
 
     @FXML
     void handleCancelar(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/screens/MainScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/views/MainScreen.fxml"));
             Parent initialize = loader.load();
 
             Stage stage = (Stage) cancelButton.getScene().getWindow();

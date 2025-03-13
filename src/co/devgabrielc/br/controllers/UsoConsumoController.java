@@ -15,7 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import static co.devgabrielc.br.controllers.LoginController.*;
-import static co.devgabrielc.br.helpers.Functions.*;
+import static co.devgabrielc.br.services.Functions.*;
 
 public class UsoConsumoController {
     @FXML
@@ -77,7 +77,7 @@ public class UsoConsumoController {
     @FXML
     void handleCancelar(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/screens/AddScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/views/AddScreen.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) cancelButton.getScene().getWindow();

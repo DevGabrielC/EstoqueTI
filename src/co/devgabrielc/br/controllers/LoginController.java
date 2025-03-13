@@ -18,7 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static co.devgabrielc.br.helpers.Functions.showAlertError;
+import static co.devgabrielc.br.services.Functions.showAlertError;
 
 public class LoginController {
 
@@ -42,7 +42,7 @@ public class LoginController {
         // Verifica o login, se as credenciais existirem no banco de dados, usuário irá passar
         if (validarLogin(username, password)) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/screens/MainScreen.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/views/MainScreen.fxml"));
                 Parent root = loader.load();
 
                 // Configura o Stage atual para exibir a MainController
@@ -63,7 +63,7 @@ public class LoginController {
     @FXML
     void handleRegisterScreen(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/screens/RegisterScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/views/RegisterScreen.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) registerButton.getScene().getWindow();
             Scene scene = new Scene(root);
@@ -75,7 +75,6 @@ public class LoginController {
         }
     }
 
-    // Metodo para validar cadastro
     static boolean validarCadastro(String username) {
         // Query para verificar se o usuário e senha existem no banco, se existirem, retornará erro
         // Caso contrário, o cadastro irá prosseguir
@@ -109,14 +108,17 @@ public class LoginController {
                 usuarioLogado = fname + " " + lname;
                 rs.close();
                 pstmt.close();
+
                 return true;
             } else {
                 rs.close();
                 pstmt.close();
+
                 return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
+
             return false;
         }
     }

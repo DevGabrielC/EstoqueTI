@@ -5,10 +5,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Objects;
+
 public class Application extends javafx.application.Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent initialize = FXMLLoader.load(getClass().getResource("/co/devgabrielc/br/screens/LoginScreen.fxml"));
+        Parent initialize = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/co/devgabrielc/br/views/LoginScreen.fxml")));
         primaryStage.setTitle("Estoque TI");
         primaryStage.setScene(new Scene(initialize));
         primaryStage.show();

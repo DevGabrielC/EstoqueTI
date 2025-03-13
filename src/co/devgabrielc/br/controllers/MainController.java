@@ -1,7 +1,7 @@
 package co.devgabrielc.br.controllers;
 
 import co.devgabrielc.br.database.DatabaseConnection;
-import co.devgabrielc.br.entities.Estoque;
+import co.devgabrielc.br.repositories.Estoque;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +30,7 @@ import java.util.Locale;
 
 import static co.devgabrielc.br.database.DatabaseConnection.atualizarBancoDeDados;
 import static co.devgabrielc.br.controllers.LoginController.*;
-import static co.devgabrielc.br.helpers.Functions.*;
+import static co.devgabrielc.br.services.Functions.*;
 
 public class MainController {
     @FXML
@@ -94,6 +94,7 @@ public class MainController {
             atualizarBancoDeDados("grupo_equipamento", event1.getNewValue(), grupoEquip.getId());
             registrarHistorico(usuarioLogado, "Edição.", "Alteração do nome do grupo para: " + event1.getNewValue());
         });
+
         tipoEquipamento.setCellFactory(TextFieldTableCell.forTableColumn());
         tipoEquipamento.setOnEditCommit(event1 -> {
             Estoque tipoEquip = event1.getRowValue();
@@ -101,6 +102,7 @@ public class MainController {
             atualizarBancoDeDados("tipo_equipamento", event1.getNewValue(), tipoEquip.getId());
             registrarHistorico(usuarioLogado, "Edição de material", "Alteração do nome do tipo para: " + event1.getNewValue());
         });
+
         marca.setCellFactory(TextFieldTableCell.forTableColumn());
         marca.setOnEditCommit(event1 -> {
             Estoque marca = event1.getRowValue();
@@ -108,6 +110,7 @@ public class MainController {
             atualizarBancoDeDados("marca", event1.getNewValue(), marca.getId());
             registrarHistorico(usuarioLogado, "Edição de material", "Alteração da marca para: " + event1.getNewValue());
         });
+
         modelo.setCellFactory(TextFieldTableCell.forTableColumn());
         modelo.setOnEditCommit(event1 -> {
             Estoque modelo = event1.getRowValue();
@@ -115,6 +118,7 @@ public class MainController {
             atualizarBancoDeDados("modelo", event1.getNewValue(), modelo.getId());
             registrarHistorico(usuarioLogado, "Edição de material", "Alteração do modelo para: " + event1.getNewValue());
         });
+
         numeroSerie.setCellFactory(TextFieldTableCell.forTableColumn());
         numeroSerie.setOnEditCommit(event1 -> {
             Estoque numeroSerie = event1.getRowValue();
@@ -122,6 +126,7 @@ public class MainController {
             atualizarBancoDeDados("numero_serie", event1.getNewValue(), numeroSerie.getId());
             registrarHistorico(usuarioLogado, "Edição de material", "Alteração do número de série para: " + event1.getNewValue());
         });
+
         patrimonio.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         patrimonio.setOnEditCommit(event1 -> {
             Estoque patrimonio = event1.getRowValue();
@@ -129,6 +134,7 @@ public class MainController {
             atualizarBancoDeDados("patrimonio", event1.getNewValue(), patrimonio.getId());
             registrarHistorico(usuarioLogado, "Edição de material", "Alteração do nome patrimônio para: " + event1.getNewValue());
         });
+
         quantidade.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         quantidade.setOnEditCommit(event1 -> {
             Estoque quantidade = event1.getRowValue();
@@ -136,6 +142,7 @@ public class MainController {
             atualizarBancoDeDados("quantidade", event1.getNewValue(), quantidade.getId());
             registrarHistorico(usuarioLogado, "Edição de material", "Alteração da quantidade para: " + event1.getNewValue());
         });
+
         descricao.setCellFactory(TextFieldTableCell.forTableColumn());
         descricao.setOnEditCommit(event1 -> {
             Estoque descricao = event1.getRowValue();
@@ -155,7 +162,7 @@ public class MainController {
     @FXML
     private void handleAddScreen(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/co/devgabrielc/br/screens/AddScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(MainController.class.getResource("/co/devgabrielc/br/views/AddScreen.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
@@ -174,18 +181,14 @@ public class MainController {
             boolean sucesso = removerItemEstoqueNoBanco(itemSelecionado.getId());
 
             if (sucesso) {
-                ObservableList<Estoque> listaBase = table.getItems();
-                if (listaBase instanceof FilteredList) {
-                    listaBase = (ObservableList<Estoque>) ((FilteredList<Estoque>) listaBase).getSource();
-                }
                 showAlertSuccess("Sucesso!", "Material removido com sucesso!");
+                carregarMateriaisComFiltro(table);
             } else {
                 showAlertError("Erro!", "Falha ao remover o material do banco de dados.");
             }
         } else {
             showAlertError("Erro!", "Selecione um material para remoção.");
         }
-        table.refresh();
     }
 
     public boolean removerItemEstoqueNoBanco(int itemId) {
@@ -252,6 +255,7 @@ public class MainController {
     private void carregarMateriaisComFiltro(TableView<Estoque> table) {
         ObservableList<Estoque> materiais = FXCollections.observableArrayList(table.getItems());
         FilteredList<Estoque> materiaisFiltrados = new FilteredList<>(materiais, _ -> true);
+
         table.setItems(materiaisFiltrados);
         String query = "SELECT * FROM materiais";
 
@@ -286,9 +290,9 @@ public class MainController {
 
                 return material.getGrupoEquipamento().toLowerCase().contains(lowerCaseFilter) ||
                         material.getTipoEquipamento().toLowerCase().contains(lowerCaseFilter) ||
-                        material.getMarca().toLowerCase().contains(lowerCaseFilter) ||
-                        material.getModelo().toLowerCase().contains(lowerCaseFilter) ||
-                        material.getNumeroSerie().toLowerCase().contains(lowerCaseFilter) ||
+                        material.getMarca().toLowerCase().contains(lowerCaseFilter)           ||
+                        material.getModelo().toLowerCase().contains(lowerCaseFilter)          ||
+                        material.getNumeroSerie().toLowerCase().contains(lowerCaseFilter)     ||
                         material.getDescricao().toLowerCase().contains(lowerCaseFilter);
             });
         });
@@ -321,9 +325,9 @@ public class MainController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, dd/MM/yyyy", Locale.forLanguageTag("pt-BR"));
 
         String dataFormatada = dataAtual.format(formatter);
-        String diaComPrimeiraLetraMaiuscula = dataFormatada.substring(0, 1).toUpperCase() + dataFormatada.substring(1);
+        String diaDaSemana = dataFormatada.substring(0, 1).toUpperCase() + dataFormatada.substring(1);
 
-        dataAtualText.setText(diaComPrimeiraLetraMaiuscula);
+        dataAtualText.setText(diaDaSemana);
     }
 
     private String getTipoEquipamento(int itemId) {

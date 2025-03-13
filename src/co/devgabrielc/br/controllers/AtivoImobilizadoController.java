@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import java.sql.*;
 
 import static co.devgabrielc.br.controllers.LoginController.*;
-import static co.devgabrielc.br.helpers.Functions.*;
+import static co.devgabrielc.br.services.Functions.*;
 
 // Tela de Ativo Imobilizado
 public class AtivoImobilizadoController {
@@ -52,14 +52,16 @@ public class AtivoImobilizadoController {
 
         // Obrigatório ter os campos grupoEquipamento, tipoEquipamento, marca, modelo, numeroSerie e patrimonio preenchidos
         // Condição para verificar campos preenchidos
-        if (grupoEquipamento.isEmpty() || tipoEquipamento.isEmpty() || marca.isEmpty() || modelo.isEmpty() || numeroSerie.isEmpty() || patrimonio.isEmpty()) {
+        if (grupoEquipamento.isEmpty() || tipoEquipamento.isEmpty() || marca.isEmpty() || modelo.isEmpty() ||
+                numeroSerie.isEmpty() || patrimonio.isEmpty()) {
             showAlertError("Erro!", "Campos obrigatórios não preenchidos.");
             return;
         }
         // Query para inserir os parâmetros
         // Quantidade do ativo vem por padrão com o valor "1", caso queira alterar, só adicionar o ativo e alterar na tabela posteriormente
-        String query = "INSERT INTO materiais (grupo_equipamento, tipo_equipamento, marca, modelo, numero_serie, quantidade, patrimonio, descricao) VALUES" +
-                "(?, ?, ?, ?, ?, 1, ?, ?)";
+        String query = "INSERT INTO materiais (grupo_equipamento, tipo_equipamento, marca, modelo, numero_serie, quantidade, " +
+                "patrimonio, descricao) VALUES (?, ?, ?, ?, ?, 1, ?, ?)";
+
             try (Connection conn = DatabaseConnection.connect();
                  PreparedStatement stmt = conn.prepareStatement(query)){
 
@@ -72,15 +74,13 @@ public class AtivoImobilizadoController {
                 stmt.setString(7, descricao);
 
                 int rowsInserted = stmt.executeUpdate();
-
                 if (rowsInserted > 0) {
                     showAlertSuccess("Sucesso!", "Material adicionado com sucesso!");
-                    int quantidade = 1;
                     registrarHistorico(usuarioLogado, "Adição de material", "Material: " + tipoEquipamento + ", Quantidade: 1");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                showAlertError("Erro!", "Ocorreu um erro ao adicionar o(s) material(is). Tente novamente.");
+                showAlertError("Erro!", "Ocorreu um erro ao adicionar o material. Tente novamente.");
         }
     }
 
@@ -88,7 +88,7 @@ public class AtivoImobilizadoController {
     @FXML
     void handleCancelar(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/screens/AddScreen.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/devgabrielc/br/views/AddScreen.fxml"));
             Parent root = loader.load();
 
             Stage stage = (Stage) cancelButton.getScene().getWindow();
