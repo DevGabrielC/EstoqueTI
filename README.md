@@ -17,6 +17,6 @@ O repositório do projeto está organizado em pastas e subpastas, sendo:
 - ‘application’ - Pasta aonde se encontra o coração do sistema, que faz incializa;
 - ‘controllers’ - Controladores do sistema, neles tem diversas funcionalidades, baseados em um sistema CRUD.
 - ‘database’ - Está a conexão com o Banco de Dados local (estoqueti.db);
-- ‘entities’ - Entidades, no caso, somente aonde ficam armazenados os materiais do estoque;
-- ‘helpers’ - Fica armazenado um arquivo com as funções que são utilizadas nas demais classes;
-- ‘screens’ - Fica armazenado todas as telas do sistema, desde Login e Registro até a Adição de Ativos e Uso e consumos.
+- ‘repositories’ - Entidades, no caso, somente aonde ficam armazenados os materiais do estoque;
+- ‘services’ - Fica armazenado um arquivo com as funções que são utilizadas nas demais classes;
+- ‘views’ - Fica armazenado todas as telas do sistema, desde Login e Registro até a Adição de Ativos e Uso e consumos.
