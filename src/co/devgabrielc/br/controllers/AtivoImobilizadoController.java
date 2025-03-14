@@ -76,7 +76,7 @@ public class AtivoImobilizadoController {
                 int rowsInserted = stmt.executeUpdate();
                 if (rowsInserted > 0) {
                     showAlertSuccess("Sucesso!", "Material adicionado com sucesso!");
-                    registrarHistorico(usuarioLogado, "Adição de material", "Material: " + tipoEquipamento + ", Quantidade: 1");
+                    registrarHistorico(usuarioLogado, "Adição", "Material: " + tipoEquipamento + ", Quantidade: 1");
                 }
             } catch (Exception e) {
                 e.printStackTrace();

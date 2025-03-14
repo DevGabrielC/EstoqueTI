@@ -9,7 +9,7 @@ import static co.devgabrielc.br.services.Functions.showAlertError;
 
 public class DatabaseConnection {
     // Função completa para conectar ao Banco de Dados SQLITE3
-    private static final String URL = "jdbc:sqlite:app/db/estoqueti.db";
+    private static final String URL = "jdbc:sqlite:src/co/devgabrielc/br/database/estoqueti.db";
 
     public static Connection connect() throws SQLException {
         return DriverManager.getConnection(URL);

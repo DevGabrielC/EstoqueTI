@@ -63,7 +63,7 @@ public class UsoConsumoController {
             if (rowsInserted > 0) {
                 if (Integer.parseInt(quantidadeField.getText()) > 1) {
                     showAlertSuccess("Sucesso!", "Materiais adicionados com sucesso!");
-                    registrarHistorico(usuarioLogado, "Adição de material", "Material: " + tipoEquipamento + ", Quantidade: " + quantidade);
+                    registrarHistorico(usuarioLogado, "Adição", "Material: " + tipoEquipamento + ", Quantidade: " + quantidade);
                 } else {
                     showAlertSuccess("Sucesso!", "Material adicionado com sucesso!");
                 }

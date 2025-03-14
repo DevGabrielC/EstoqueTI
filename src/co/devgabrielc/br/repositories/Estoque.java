@@ -51,7 +51,7 @@ public class Estoque {
         return this.quantidade;
     }
 
-    public int getPatrimonio() {
+    public Integer getPatrimonio() {
         return this.patrimonio;
     }
 

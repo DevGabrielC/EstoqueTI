@@ -90,65 +90,81 @@ public class MainController {
         grupoEquipamento.setCellFactory(TextFieldTableCell.forTableColumn());
         grupoEquipamento.setOnEditCommit(event1 -> {
             Estoque grupoEquip = event1.getRowValue();
+            String nomeGrupoEquipAnterior = grupoEquip.getGrupoEquipamento();
+            String nomeGrupoEquipNovo = event1.getNewValue();
             grupoEquip.setGrupoEquipamento(event1.getNewValue());
             atualizarBancoDeDados("grupo_equipamento", event1.getNewValue(), grupoEquip.getId());
-            registrarHistorico(usuarioLogado, "Edição.", "Alteração do nome do grupo para: " + event1.getNewValue());
+            registrarHistorico(usuarioLogado, "Edição", "Alteração do nome do grupo de " + nomeGrupoEquipAnterior + " para " + nomeGrupoEquipNovo);
         });
 
         tipoEquipamento.setCellFactory(TextFieldTableCell.forTableColumn());
         tipoEquipamento.setOnEditCommit(event1 -> {
             Estoque tipoEquip = event1.getRowValue();
+            String nomeTipoEquipAntigo = tipoEquip.getTipoEquipamento();
+            String nomeTipoEquipNovo = event1.getNewValue();
             tipoEquip.setTipoEquipamento(event1.getNewValue());
             atualizarBancoDeDados("tipo_equipamento", event1.getNewValue(), tipoEquip.getId());
-            registrarHistorico(usuarioLogado, "Edição de material", "Alteração do nome do tipo para: " + event1.getNewValue());
+            registrarHistorico(usuarioLogado, "Edição", "Alteração do nome do tipo de: " + nomeTipoEquipAntigo + " para: " + nomeTipoEquipNovo);
         });
 
         marca.setCellFactory(TextFieldTableCell.forTableColumn());
         marca.setOnEditCommit(event1 -> {
             Estoque marca = event1.getRowValue();
+            String nomeMarcaAntigo = marca.getMarca();
+            String nomeMarcaNovo = event1.getNewValue();
             marca.setMarca(event1.getNewValue());
             atualizarBancoDeDados("marca", event1.getNewValue(), marca.getId());
-            registrarHistorico(usuarioLogado, "Edição de material", "Alteração da marca para: " + event1.getNewValue());
+            registrarHistorico(usuarioLogado, "Edição", "Alteração da marca de: " + nomeMarcaAntigo + "para: " + nomeMarcaNovo);
         });
 
         modelo.setCellFactory(TextFieldTableCell.forTableColumn());
         modelo.setOnEditCommit(event1 -> {
             Estoque modelo = event1.getRowValue();
+            String nomeModeloAntigo = modelo.getModelo();
+            String nomeModeloNovo = event1.getNewValue();
             modelo.setModelo(event1.getNewValue());
             atualizarBancoDeDados("modelo", event1.getNewValue(), modelo.getId());
-            registrarHistorico(usuarioLogado, "Edição de material", "Alteração do modelo para: " + event1.getNewValue());
+            registrarHistorico(usuarioLogado, "Edição", "Alteração do modelo de: " + nomeModeloAntigo + " para: " + nomeModeloNovo);
         });
 
         numeroSerie.setCellFactory(TextFieldTableCell.forTableColumn());
         numeroSerie.setOnEditCommit(event1 -> {
             Estoque numeroSerie = event1.getRowValue();
+            String numeroSerieAntigo = numeroSerie.getNumeroSerie();
+            String numeroSerieNovo = event1.getNewValue();
             numeroSerie.setNumeroSerie(event1.getNewValue());
             atualizarBancoDeDados("numero_serie", event1.getNewValue(), numeroSerie.getId());
-            registrarHistorico(usuarioLogado, "Edição de material", "Alteração do número de série para: " + event1.getNewValue());
+            registrarHistorico(usuarioLogado, "Edição", "Alteração do número de série de: " + numeroSerieAntigo + " para: " + numeroSerieNovo);
         });
 
         patrimonio.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         patrimonio.setOnEditCommit(event1 -> {
             Estoque patrimonio = event1.getRowValue();
+            String nomePatrimonioAntigo = String.valueOf(patrimonio.getPatrimonio());
+            String nomePatrimonioNovo = String.valueOf(event1.getNewValue());
             patrimonio.setPatrimonio(event1.getNewValue());
             atualizarBancoDeDados("patrimonio", event1.getNewValue(), patrimonio.getId());
-            registrarHistorico(usuarioLogado, "Edição de material", "Alteração do nome patrimônio para: " + event1.getNewValue());
+            registrarHistorico(usuarioLogado, "Edição", "Alteração do nome patrimônio de: " + nomePatrimonioAntigo + " para: " + nomePatrimonioNovo);
         });
 
         quantidade.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         quantidade.setOnEditCommit(event1 -> {
             Estoque quantidade = event1.getRowValue();
+            int quantidadeAntiga = quantidade.getQuantidade();
+            int quantidadeNova = event1.getNewValue();
             quantidade.setQuantidade(event1.getNewValue());
             atualizarBancoDeDados("quantidade", event1.getNewValue(), quantidade.getId());
-            registrarHistorico(usuarioLogado, "Edição de material", "Alteração da quantidade para: " + event1.getNewValue());
+            registrarHistorico(usuarioLogado, "Edição", "Alteração da quantidade de: " + quantidadeAntiga + " para: " + quantidadeNova);
         });
 
         descricao.setCellFactory(TextFieldTableCell.forTableColumn());
         descricao.setOnEditCommit(event1 -> {
             Estoque descricao = event1.getRowValue();
+            String nomeDescricaoAntigo = descricao.getDescricao();
+            String nomeDescricaoNovo = event1.getNewValue();
             descricao.setDescricao(event1.getNewValue());
             atualizarBancoDeDados("descricao", event1.getNewValue(), descricao.getId());
-            registrarHistorico(usuarioLogado, "Edição de material", "Alteração da descrição para: " + event1.getNewValue());
+            registrarHistorico(usuarioLogado, "Edição", "Alteração da descrição de: " + nomeDescricaoAntigo + " para: " + nomeDescricaoNovo);
         });
     }
 
@@ -202,7 +218,7 @@ public class MainController {
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                registrarHistorico(usuarioLogado, "Remoção de material", "Material removido: "
+                registrarHistorico(usuarioLogado, "Remoção", "Material removido: "
                                                                                         + materialRemovido
                                                                                         + ", Marca: "
                                                                                         + marcaRemovida);
