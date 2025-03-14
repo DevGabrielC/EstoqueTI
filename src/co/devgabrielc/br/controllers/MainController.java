@@ -94,7 +94,7 @@ public class MainController {
             String nomeGrupoEquipNovo = event1.getNewValue();
             grupoEquip.setGrupoEquipamento(event1.getNewValue());
             atualizarBancoDeDados("grupo_equipamento", event1.getNewValue(), grupoEquip.getId());
-            registrarHistorico(usuarioLogado, "Edição", "Alteração do nome do grupo de " + nomeGrupoEquipAnterior + " para " + nomeGrupoEquipNovo);
+            registrarHistorico(usuarioLogado, "Edição", "Alteração do nome do grupo de: " + nomeGrupoEquipAnterior + " para: " + nomeGrupoEquipNovo);
         });
 
         tipoEquipamento.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -114,7 +114,7 @@ public class MainController {
             String nomeMarcaNovo = event1.getNewValue();
             marca.setMarca(event1.getNewValue());
             atualizarBancoDeDados("marca", event1.getNewValue(), marca.getId());
-            registrarHistorico(usuarioLogado, "Edição", "Alteração da marca de: " + nomeMarcaAntigo + "para: " + nomeMarcaNovo);
+            registrarHistorico(usuarioLogado, "Edição", "Alteração da marca de: " + nomeMarcaAntigo + " para: " + nomeMarcaNovo);
         });
 
         modelo.setCellFactory(TextFieldTableCell.forTableColumn());
