@@ -2,7 +2,8 @@
 ### Desenvolver um sistema básico e prático para gerenciamento de estoque TI da empresa Lafaete Locações
 
 ## Linguagens e tecnologias utilizadas
-- JavaFX
+- Java versão 23
+- JavaFX versão 23
 - Java JDBC
 - SQLite3
 
