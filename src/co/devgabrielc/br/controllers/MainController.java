@@ -197,8 +197,8 @@ public class MainController {
             boolean sucesso = removerItemEstoqueNoBanco(itemSelecionado.getId());
 
             if (sucesso) {
+                ((FilteredList<Estoque>) table.getItems()).getSource().remove(itemSelecionado);
                 showAlertSuccess("Sucesso!", "Material removido com sucesso!");
-                carregarMateriaisComFiltro(table);
             } else {
                 showAlertError("Erro!", "Falha ao remover o material do banco de dados.");
             }
@@ -272,12 +272,29 @@ public class MainController {
         ObservableList<Estoque> materiais = FXCollections.observableArrayList(table.getItems());
         FilteredList<Estoque> materiaisFiltrados = new FilteredList<>(materiais, _ -> true);
 
-        table.setItems(materiaisFiltrados);
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            materiaisFiltrados.setPredicate(material -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                return material.getGrupoEquipamento().toLowerCase().contains(lowerCaseFilter) ||
+                        material.getTipoEquipamento().toLowerCase().contains(lowerCaseFilter) ||
+                        material.getMarca().toLowerCase().contains(lowerCaseFilter)           ||
+                        material.getModelo().toLowerCase().contains(lowerCaseFilter)          ||
+                        material.getNumeroSerie().toLowerCase().contains(lowerCaseFilter)     ||
+                        material.getDescricao().toLowerCase().contains(lowerCaseFilter);
+            });
+        });
+
         String query = "SELECT * FROM materiais";
 
         try (Connection conn = DatabaseConnection.connect();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
+
+            materiais.clear();
 
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -296,22 +313,6 @@ public class MainController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            materiaisFiltrados.setPredicate(material -> {
-                if (newValue == null || newValue.isEmpty()) {
-                    return true;
-                }
-                String lowerCaseFilter = newValue.toLowerCase();
-
-                return material.getGrupoEquipamento().toLowerCase().contains(lowerCaseFilter) ||
-                        material.getTipoEquipamento().toLowerCase().contains(lowerCaseFilter) ||
-                        material.getMarca().toLowerCase().contains(lowerCaseFilter)           ||
-                        material.getModelo().toLowerCase().contains(lowerCaseFilter)          ||
-                        material.getNumeroSerie().toLowerCase().contains(lowerCaseFilter)     ||
-                        material.getDescricao().toLowerCase().contains(lowerCaseFilter);
-            });
-        });
 
         table.setItems(materiaisFiltrados);
     }
