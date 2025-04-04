@@ -1,10 +1,12 @@
 # **Sistema de estoque TI**
 
 ## Linguagens e tecnologias utilizadas
-- Java (versão 23) - Linguagem principal para a lógica do sistema.
+- Java SDK (versão 23) - Linguagem principal para a lógica do sistema.
 - JavaFX (versão 23) - Responsável pela interface gráfica do usuário.
 - Java JDBC - Para conexão e manipulação do banco de dados.
 - SQLite3 - Sistema de gerenciamento de banco de dados leve e eficiente.
+- Scene Builder - Para interface gráfica do sistema.
+- IntelliJ IDEA - Ambiente para criação do sistema.
 
 # Visão Geral
 
