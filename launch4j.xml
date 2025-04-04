@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\gabriel.coelho\Pictures\Eu\Meus projetos\EstoqueTI\out\artifacts\EstoqueTI_jar\EstoqueTI.jar</jar>
+  <outfile>C:\Users\gabriel.coelho\Pictures\Eu\Meus projetos\EstoqueTI\EstoqueTIApp.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>high</priority>
+  <downloadUrl>https://www.java.com/pt-br/download/manual.jsp</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\gabriel.coelho\Pictures\Eu\Meus projetos\EstoqueTI\iconTI.ico</icon>
+  <classPath>
+    <mainClass>co.devgabrielc.br.application.Application</mainClass>
+    <cp>C:\Libs Java\javafx-sdk-23\lib</cp>
+    <cp>C:\Libs Java\sqlite-jdbc-3.48.0.0.jar</cp>
+  </classPath>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>true</requiresJdk>
+    <requires64Bit>true</requires64Bit>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+    <opt>--module-path &quot;C:\Libs Java\javafx-sdk-23\lib&quot; --add-modules javafx.controls,javafx.fxml	</opt>
+  </jre>
+</launch4jConfig>
