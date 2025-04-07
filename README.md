@@ -34,13 +34,13 @@ O Sistema de Estoque TI foi desenvolvido para oferecer um controle eficiente e p
 Requisitos:
 - IntelliJ IDEA (ou outra IDE compatível com JavaFX)
 - JDK 23 instalado
-- Dependências JavaFX configuradas no projeto
+- Dependências JavaFX e JDBC SQLite3 configuradas no projeto
 
 ### Passos:
 1. Clone o repositório:
 2. git clone https://github.com/DevGabrielC/EstoqueTI.git
 3. Abra o projeto na sua IDE de preferência (Neste projeto, eu utilizei o InteliJ IDEA).
-4. Certifique-se de que as dependências do JavaFX estão corretamente configuradas.
+4. Certifique-se de que as dependências do JavaFX e JDBC SQLite3 estão corretamente configuradas.
 6. Execute a classe principal localizada em application/Main.java.
 
 # Este projeto está sob a licença MIT - consulte o arquivo LICENSE para mais detalhes.
