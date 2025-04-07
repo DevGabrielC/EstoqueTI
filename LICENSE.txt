@@ -2,7 +2,5 @@ MIT License
 
 Copyright (c) 2025 DevGabrielC
 
-⚠️ **Todos os direitos reservados.**
-Este projeto é disponibilizado publicamente apenas para fins de visualização.
-É proibido copiar, modificar, distribuir ou utilizar qualquer parte deste código sem permissão
+É permitido copiar, modificar, distribuir ou utilizar qualquer parte deste código sem permissão
 explícita por escrito do autor.
